@@ -1,5 +1,3 @@
-import { captureRejectionSymbol } from "events";
-
 export function calculate(button: string, state: State): State {
   if (isNumberButton(button)) {
     return handleNumberButton(button, state);
@@ -83,7 +81,7 @@ function handleOperatorButton(button: string, state: State): State {
   const nextValue = operate(state);
   return {
     current: nextValue,
-    operand: nextValue,
+    operand: parseFloat(nextValue),
     operator: button,
     isNextClear: true,
   };
@@ -151,13 +149,13 @@ function handleEqualButton(state: State): State {
   };
 }
 
-function operate(state: State): number {
+function operate(state: State): string {
   const current = parseFloat(state.current);
   if (state.operator === "+") {
-    return state.operand + current;
+    return `${state.operand + current}`;
   }
   if (state.operator === "-") {
-    return state.operand - current;
+    return `${state.operand - current}`;
   }
-  return current;
+  return `${current}`;
 }
