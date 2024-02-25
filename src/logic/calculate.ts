@@ -26,6 +26,7 @@ export interface State {
   operator: string | null;
   isNextClear: boolean;
 }
+
 function isNumberButton(button: string) {
   return (
     button === "0" ||
@@ -69,6 +70,7 @@ function handleNumberButton(button: string, state: State): State {
 function isOperatorButton(button: string) {
   return button === "+" || button === "-";
 }
+
 function handleOperatorButton(button: string, state: State): State {
   if (state.operator === null) {
     return {
@@ -86,6 +88,7 @@ function handleOperatorButton(button: string, state: State): State {
     isNextClear: true,
   };
 }
+
 function isDotButton(button: string) {
   return button === ".";
 }
@@ -101,9 +104,11 @@ function handleDotButton(state: State): State {
     isNextClear: false,
   };
 }
+
 function isDeleteButton(button: string) {
   return button === "Del";
 }
+
 function handleDeleteButton(state: State): State {
   if (state.current.length === 1) {
     return {
@@ -120,9 +125,11 @@ function handleDeleteButton(state: State): State {
     isNextClear: false,
   };
 }
+
 function isAllClearButton(button: string) {
   return button === "AC";
 }
+
 function handleAllClearButton(): State {
   return {
     current: "0",
