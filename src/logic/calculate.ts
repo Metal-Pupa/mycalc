@@ -1,5 +1,3 @@
-import { captureRejectionSymbol } from "events";
-
 export function calculate(button: string, state: State): State {
   if (isNumberButton(button)) {
     return handleNumberButton(button, state);
@@ -28,6 +26,7 @@ export interface State {
   operator: string | null;
   isNextClear: boolean;
 }
+
 function isNumberButton(button: string) {
   return (
     button === "0" ||
@@ -71,6 +70,7 @@ function handleNumberButton(button: string, state: State): State {
 function isOperatorButton(button: string) {
   return button === "+" || button === "-";
 }
+
 function handleOperatorButton(button: string, state: State): State {
   if (state.operator === null) {
     return {
@@ -83,11 +83,12 @@ function handleOperatorButton(button: string, state: State): State {
   const nextValue = operate(state);
   return {
     current: nextValue,
-    operand: nextValue,
+    operand: parseFloat(nextValue),
     operator: button,
     isNextClear: true,
   };
 }
+
 function isDotButton(button: string) {
   return button === ".";
 }
@@ -103,9 +104,11 @@ function handleDotButton(state: State): State {
     isNextClear: false,
   };
 }
+
 function isDeleteButton(button: string) {
   return button === "Del";
 }
+
 function handleDeleteButton(state: State): State {
   if (state.current.length === 1) {
     return {
@@ -122,9 +125,11 @@ function handleDeleteButton(state: State): State {
     isNextClear: false,
   };
 }
+
 function isAllClearButton(button: string) {
   return button === "AC";
 }
+
 function handleAllClearButton(): State {
   return {
     current: "0",
@@ -151,13 +156,13 @@ function handleEqualButton(state: State): State {
   };
 }
 
-function operate(state: State): number {
+function operate(state: State): string {
   const current = parseFloat(state.current);
   if (state.operator === "+") {
-    return state.operand + current;
+    return `${state.operand + current}`;
   }
   if (state.operator === "-") {
-    return state.operand - current;
+    return `${state.operand - current}`;
   }
-  return current;
+  return `${current}`;
 }
