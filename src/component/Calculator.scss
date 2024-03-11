@@ -1,12 +1,20 @@
-.display {
+.calculator {
   width: 320px;
-  margin: 0 auto;
+  margin: 40px auto 0;
+  border: 2px solid #777;
+  border-radius: 4px;
+}
+.display {
+  padding-right: 10px;
+  line-height: 80px;
   text-align: right;
-  font-size: 32px;
+  font-size: 48px;
+  border: 8px solid #ccc;
 }
 .buttonPanel {
   button {
     width: 80px;
     height: 80px;
+    font-size: 32px;
   }
 }
