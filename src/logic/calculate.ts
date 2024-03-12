@@ -66,8 +66,7 @@ function handleNumberButton(button: NumberCode, state: State): State {
 }
 
 function handleOperatorButton(button: Operator, state: State): State {
-  const nextValue = operate(state);
-  const nextCurrent = state.operator === null ? state.current : nextValue;
+  const nextCurrent = state.operator === null ? state.current : operate(state);
 
   return {
     current: nextCurrent,
@@ -78,11 +77,11 @@ function handleOperatorButton(button: Operator, state: State): State {
 }
 
 function handleDotButton(state: State): State {
-  if (state.current.indexOf(".") !== -1) {
-    return state;
-  }
+  const nextCurrent =
+    state.current.indexOf(".") !== -1 ? state.current : state.current + ".";
+
   return {
-    current: state.current + ".",
+    current: nextCurrent,
     operand: state.operand,
     operator: state.operator,
     isNextClear: false,
@@ -113,12 +112,10 @@ function handleAllClearButton(): State {
 }
 
 function handleEqualButton(state: State): State {
-  if (state.operator === null) {
-    return state;
-  }
-  const nextValue = operate(state);
+  const nextCurrent = state.operator === null ? state.current : operate(state);
+
   return {
-    current: nextValue,
+    current: nextCurrent,
     operand: 0,
     operator: null,
     isNextClear: true,
