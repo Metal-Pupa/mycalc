@@ -1,5 +1,3 @@
-import { OperationCanceledException } from "typescript";
-
 export type Operator = "+" | "-";
 export type NumberCode =
   | "0"
@@ -12,7 +10,7 @@ export type NumberCode =
   | "7"
   | "8"
   | "9";
-export type ButtonCode = NumberCode | Operator | "." | "D" | "AC" | "=";
+export type ButtonCode = NumberCode | Operator | "." | "Del" | "AC" | "=";
 
 export function calculate(button: ButtonCode, state: State): State {
   if (isNumberButton(button)) {
