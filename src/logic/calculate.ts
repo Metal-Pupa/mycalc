@@ -1,6 +1,7 @@
 export type Operator =
   | "+"
   | "-"; /*Operator型をインポート、Operator型に入るのは+か-の二つ*/
+
 export type NumberCode =
   | "0"
   | "1"
@@ -12,13 +13,18 @@ export type NumberCode =
   | "7"
   | "8"
   | "9";
-export type ButtonCode =
-  | NumberCode
-  | Operator
-  | "."
-  | "Del"
-  | "AC"
-  | "="; /*Buttoncode型をインポート、Operator型に入るのはNumberCode～～～＝のどれか*/
+
+/**
+ * ButtonCode型は、Buttonのクリックイベントの種類を表す値列挙型です。
+ *
+ * - NumberCode: 0-9の数字
+ * - Operator: +,-の算術演算子
+ * - ".": 小数点
+ * - "Del": 削除ボタン
+ * - "AC": 初期化ボタン
+ * - "=": 等号ボタン(計算結果の表示)
+ */
+export type ButtonCode = NumberCode | Operator | "." | "Del" | "AC" | "=";
 
 export interface State {
   current: string;
