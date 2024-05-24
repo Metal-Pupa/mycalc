@@ -1,6 +1,4 @@
-export type Operator =
-  | "+"
-  | "-"; /*Operator型をインポート、Operator型に入るのは+か-の二つ*/
+export type Operator = "+" | "-";
 
 export type NumberCode =
   | "0"
@@ -62,17 +60,42 @@ export function calculate(button: ButtonCode, currentState: State): State {
   }
 }
 
+/**
+ * handleNumberButtonは数字ボタンのクリックイベントをハンドリングする。
+ *
+ * handleNumberButtonには、buttonとstateの2つの引数をとる。
+ * buttonはNumberCodeの値であり、クリックされた数字ボタンの値を示す。
+ * stateは電卓の現在の状態を保持するオブジェクトである。
+ *
+ * handleNumberButtonは、buttonボタンをクリックした結果を反映した新しいstateオブジェクトを返す。
+ */
 function handleNumberButton(button: NumberCode, state: State): State {
-  /*handleNumberButtonはbutton、stateの引数を受け取る*/
-  const { isNextClear, operand, operator, current } =
-    state; /*stateオブジェクトからisNextClear, operand, operator, currentの値を取得する*/
+  /**
+   * stateオブジェクトからisNextClear, operand, operator, currentの値を取得する
+   */
+  const { isNextClear, operand, operator, current } = state;
 
+  /**
+   * isNextClearがtrueの場合は、current値をbutton値に置き換える。
+   * これは、演算子ボタンをクリックしてから数字ボタンをクリックした場合の処理である。
+   */
   const updatedCurrent = isNextClear
     ? button
-    : current === "0"
+    : /**
+     * isNextClearがfalseであり、current値が"0"の場合は、current値をbutton値に置き換える。
+     * これは、"0"をクリックしてから数字ボタンをクリックした場合の処理である。
+     */
+    current === "0"
     ? button
-    : current + button;
+    : /**
+       * isNextClearがfalseであり、current値が"0"でない場合は、current値とbutton値を連結する。
+       */
+      current + button;
 
+  /**
+   * updatedCurrentを保持する新しいstateオブジェクトを返す。
+   * operand, operator, isNextClearはそのまま保持する。
+   */
   return {
     current: updatedCurrent,
     operand,
