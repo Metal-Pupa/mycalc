@@ -16,7 +16,7 @@ export default function Calculator() {
     setState(nextState);
   };
   return (
-    <div className="calculator">
+    <div className="calculator" data-testid="calculator">
       <Display value={state.current} />
       <ButtonPanel buttonHandler={buttonHandler} />
     </div>
