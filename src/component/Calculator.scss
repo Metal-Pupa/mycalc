@@ -3,18 +3,18 @@
   margin: 40px auto 0;
   border: 2px solid #777;
   border-radius: 4px;
-}
+} /*電卓自体の幅、余白、線、境界の角の丸め半径を指定*/
 .display {
   padding-right: 10px;
   line-height: 80px;
   text-align: right;
   font-size: 48px;
   border: 8px solid #ccc;
-}
+} /*表示部の右側の余白、行ボックスの高さ、文字の揃え位置、文字大きさ、線種と太さと色を指定*/
 .buttonPanel {
   button {
     width: 80px;
     height: 80px;
     font-size: 32px;
-  }
+  } /*ボタンの大きさ、フォントサイズを指定*/
 }

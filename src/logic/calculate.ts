@@ -1,4 +1,6 @@
-export type Operator = "+" | "-";
+export type Operator =
+  | "+"
+  | "-"; /*Operator型をインポート、Operator型に入るのは+か-の二つ*/
 export type NumberCode =
   | "0"
   | "1"
@@ -10,7 +12,13 @@ export type NumberCode =
   | "7"
   | "8"
   | "9";
-export type ButtonCode = NumberCode | Operator | "." | "Del" | "AC" | "=";
+export type ButtonCode =
+  | NumberCode
+  | Operator
+  | "."
+  | "Del"
+  | "AC"
+  | "="; /*Buttoncode型をインポート、Operator型に入るのはNumberCode～～～＝のどれか*/
 
 export interface State {
   current: string;
@@ -49,7 +57,9 @@ export function calculate(button: ButtonCode, currentState: State): State {
 }
 
 function handleNumberButton(button: NumberCode, state: State): State {
-  const { isNextClear, operand, operator, current } = state;
+  /*handleNumberButtonはbutton、stateの引数を受け取る*/
+  const { isNextClear, operand, operator, current } =
+    state; /*stateオブジェクトからisNextClear, operand, operator, currentの値を取得する*/
 
   const updatedCurrent = isNextClear
     ? button
