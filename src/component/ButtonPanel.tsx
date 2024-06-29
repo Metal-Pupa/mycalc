@@ -1,34 +1,29 @@
 import { ButtonCode } from "../logic/calculate";
 
+const buttons = [
+  ["7", "8", "9", "AC"],
+  ["4", "5", "6", "-"],
+  ["1", "2", "3", "+"],
+  ["0", ".", "Del", "="],
+];
+
 export default function ButtonPanel(props: {
   buttonHandler: (code: ButtonCode) => void;
 }) {
   return (
     <div className="buttonPanel">
-      <div>
-        <button onClick={() => props.buttonHandler("7")}>7</button>
-        <button onClick={() => props.buttonHandler("8")}>8</button>
-        <button onClick={() => props.buttonHandler("9")}>9</button>
-        <button onClick={() => props.buttonHandler("AC")}>AC</button>
-      </div>
-      <div>
-        <button onClick={() => props.buttonHandler("4")}>4</button>
-        <button onClick={() => props.buttonHandler("5")}>5</button>
-        <button onClick={() => props.buttonHandler("6")}>6</button>
-        <button onClick={() => props.buttonHandler("-")}>-</button>
-      </div>
-      <div>
-        <button onClick={() => props.buttonHandler("1")}>1</button>
-        <button onClick={() => props.buttonHandler("2")}>2</button>
-        <button onClick={() => props.buttonHandler("3")}>3</button>
-        <button onClick={() => props.buttonHandler("+")}>+</button>
-      </div>
-      <div>
-        <button onClick={() => props.buttonHandler("0")}>0</button>
-        <button onClick={() => props.buttonHandler(".")}>.</button>
-        <button onClick={() => props.buttonHandler("Del")}>Del</button>
-        <button onClick={() => props.buttonHandler("=")}>=</button>
-      </div>
+      {buttons.map((row, i) => (
+        <div key={i}>
+          {row.map((button) => (
+            <button
+              key={button}
+              onClick={() => props.buttonHandler(button as ButtonCode)}
+            >
+              {button}
+            </button>
+          ))}
+        </div>
+      ))}
     </div>
   );
 }
