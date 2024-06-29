@@ -42,7 +42,7 @@ export function calculate(button: ButtonCode, currentState: State): State {
     case "AC":
       return handleAllClearButton();
     case "=":
-      return handleEqualButton(currentState);
+      return handleEqualButton(button, currentState);
     default:
       return currentState;
   }
@@ -66,7 +66,8 @@ function handleNumberButton(button: NumberCode, state: State): State {
 }
 
 function handleOperatorButton(button: Operator, state: State): State {
-  const nextCurrent = state.operator === null ? state.current : operate(state);
+  const nextCurrent =
+    state.operator === null ? state.current : operate(button, state);
 
   return {
     current: nextCurrent,
@@ -111,8 +112,9 @@ function handleAllClearButton(): State {
   };
 }
 
-function handleEqualButton(state: State): State {
-  const nextCurrent = state.operator === null ? state.current : operate(state);
+function handleEqualButton(button: Operator, state: State): State {
+  const nextCurrent =
+    state.operator === null ? state.current : operate(button, state);
 
   return {
     current: nextCurrent,
@@ -122,16 +124,28 @@ function handleEqualButton(state: State): State {
   };
 }
 
-function operate(calculation: State): string {
+function operate(button: Operator, calculation: State): string {
   const current = parseFloat(calculation.current);
   const operand = calculation.operand;
   const operator = calculation.operator;
 
   switch (operator) {
     case "+":
-      return `${operand + current}`;
+      if (button !== operator) {
+        return `${current}`;
+      } else if (button === "-") {
+        return `${current}`;
+      } else {
+        return `${operand + current}`;
+      }
     case "-":
-      return `${operand - current}`;
+      if (button !== operator) {
+        return `${current}`;
+      } else if (button === "+") {
+        return `${current}`;
+      } else {
+        return `${operand - current}`;
+      }
     default:
       return `${current}`;
   }

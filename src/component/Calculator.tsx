@@ -11,6 +11,8 @@ export default function Calculator() {
     operator: null,
     isNextClear: false,
   });
+  console.log(state);
+
   const buttonHandler = (code: ButtonCode) => {
     const nextState = calculate(code, state);
     setState(nextState);

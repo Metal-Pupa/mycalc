@@ -46,3 +46,15 @@ test("clear", () => {
     isNextClear: false,
   });
 });
+
+// 記号を二回連続で押したときのテストコード
+
+test("double operator", () => {
+  const result = execCalc(["1", "2", "+", "3", "+", "+", "="], makeInitState());
+  expect(result).toMatchObject({
+    current: "30",
+    operand: 0,
+    operator: null,
+    isNextClear: true,
+  });
+});
