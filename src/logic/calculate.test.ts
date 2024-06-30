@@ -17,22 +17,51 @@ const execCalc = (buttons: ButtonCode[], state: State): State => {
   return state;
 };
 
-test("add", () => {
+test("12", () => {
+  const result = execCalc(["1", "2"], makeInitState());
+  expect(result).toMatchObject({
+    current: "12",
+    operand: 0,
+    operator: null,
+    isNextClear: false,
+  });
+});
+test("1+2", () => {
+  const result = execCalc(["1", "+", "2"], makeInitState());
+  expect(result).toMatchObject({
+    current: "2",
+    operand: 1,
+    operator: "+",
+    isNextClear: false,
+  });
+});
+
+test("1+2=", () => {
   const result = execCalc(["1", "+", "2", "="], makeInitState());
   expect(result).toMatchObject({
     current: "3",
-    operand: 0,
+    operand: 3,
     operator: null,
     isNextClear: true,
   });
 });
 
-test("subtract", () => {
+test("1-2=", () => {
   const result = execCalc(["1", "-", "2", "="], makeInitState());
   expect(result).toMatchObject({
     current: "-1",
-    operand: 0,
+    operand: -1,
     operator: null,
+    isNextClear: true,
+  });
+});
+
+test("1-2-", () => {
+  const result = execCalc(["1", "-", "2", "-"], makeInitState());
+  expect(result).toMatchObject({
+    current: "-1",
+    operand: -1,
+    operator: "-",
     isNextClear: true,
   });
 });

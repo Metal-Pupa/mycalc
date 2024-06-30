@@ -116,7 +116,7 @@ function handleEqualButton(state: State): State {
 
   return {
     current: nextCurrent,
-    operand: 0,
+    operand: parseFloat(nextCurrent),
     operator: null,
     isNextClear: true,
   };
